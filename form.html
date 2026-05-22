@@ -1208,7 +1208,7 @@
             <div class="plan-card-genre">向いている業種例：士業・コンサル・不動産・金融・税理士・SNS運用</div>
           </div>
           <div class="plan-card-image-wrap">
-            <img id="step1_img_elegant" src="" alt="" style="width:100%;height:130px;object-fit:cover;display:none;border:1px solid var(--border);">
+            <img id="step1_img_elegant" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
             <div id="step1_placeholder_elegant" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
             <a class="plan-card-link" href="https://preview.studio.site/templates/exNWYobqlB" target="_blank" rel="noopener">全体を見る ↗</a>
           </div>
@@ -1865,7 +1865,7 @@
           5枚目：登録番号 T1234567890123
         </div>
         <div style="flex-shrink:0;width:180px;height:140px;position:relative;">
-        <img id="freemate_img" src="" alt="フリーメイト" style="width:180px;height:140px;object-fit:cover;display:none;border:1px solid var(--border);">
+        <img id="freemate_img" src="" alt="フリーメイト" style="width:180px;height:auto;display:none;border:1px solid var(--border);">
         <div id="freemate_placeholder" style="width:180px;height:140px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
         </div>
       </div>
@@ -1926,7 +1926,7 @@
         <div class="plan-card-inner">
           <div class="plan-card-text"></div>
           <div class="plan-card-image-wrap">
-            <img id="meishi_img_yoko_a" src="" alt="" style="width:100%;height:80px;object-fit:cover;display:none;border:1px solid var(--border);">
+            <img id="meishi_img_yoko_a" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
             <div id="meishi_placeholder_yoko_a" style="width:100%;height:80px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
           </div>
         </div>
@@ -1940,7 +1940,7 @@
         <div class="plan-card-inner">
           <div class="plan-card-text"></div>
           <div class="plan-card-image-wrap">
-            <img id="meishi_img_yoko_b" src="" alt="" style="width:100%;height:80px;object-fit:cover;display:none;border:1px solid var(--border);">
+            <img id="meishi_img_yoko_b" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
             <div id="meishi_placeholder_yoko_b" style="width:100%;height:80px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
           </div>
         </div>
@@ -1954,7 +1954,7 @@
         <div class="plan-card-inner">
           <div class="plan-card-text"></div>
           <div class="plan-card-image-wrap">
-            <img id="meishi_img_tate_a" src="" alt="" style="width:100%;height:80px;object-fit:cover;display:none;border:1px solid var(--border);">
+            <img id="meishi_img_tate_a" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
             <div id="meishi_placeholder_tate_a" style="width:100%;height:80px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
           </div>
         </div>
@@ -1968,7 +1968,7 @@
         <div class="plan-card-inner">
           <div class="plan-card-text"></div>
           <div class="plan-card-image-wrap">
-            <img id="meishi_img_tate_b" src="" alt="" style="width:100%;height:80px;object-fit:cover;display:none;border:1px solid var(--border);">
+            <img id="meishi_img_tate_b" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
             <div id="meishi_placeholder_tate_b" style="width:100%;height:80px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
           </div>
         </div>
@@ -2534,6 +2534,13 @@
   }
 
   window.addEventListener('DOMContentLoaded', loadImages);
+
+  // STEPが表示されるたびに画像を再適用
+  const _origShowStep = window.showStep;
+  window.showStep = function(n) {
+    if (_origShowStep) _origShowStep(n);
+    setTimeout(loadImages, 100);
+  };
 </script>
 </body>
 </html>
