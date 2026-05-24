@@ -1160,7 +1160,7 @@
   </div>
 
 <!-- STEP 0 -->
-  <div class="step step0-wrap" id="step0">
+  <div class="step0-wrap" id="step0">
     <div class="plan-set-block">
       <div class="plan-set-image-wrap">
         <div class="plan-set-image-placeholder">写真</div>
@@ -1458,6 +1458,15 @@
         <input type="text" id="industry" placeholder="例：整体院 / ウェブデザイン / コンサルティング">
       </div>
       <div class="field">
+        <label>メールアドレス：フォーム送信後の自動返信メールの送信先になります。<span class="required">必須</span></label>
+        <input type="email" id="email_address" placeholder="例：info@example.com">
+      </div>
+      <div class="field">
+        <label>電話番号<span class="required">必須</span></label>
+        <input type="tel" id="phone_number" placeholder="例：090-0000-0000">
+      </div>
+      <hr style="border:none;border-top:1px solid var(--border);margin:8px 0 24px;">
+      <div class="field">
         <label>どんな人に向けた仕事か<span class="required">必須</span></label>
         <input type="text" id="target" placeholder="例：30代の働くママ / 中小企業の経営者">
       </div>
@@ -1557,6 +1566,20 @@
       <div class="field">
         <label>問い合わせ前に伝えておきたいこと<span class="optional">任意</span></label>
         <textarea id="contact_note" placeholder="例：初回は無料相談をお受けしています"></textarea>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-block-title">SNS・各種URL</div>
+      <div class="field">
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">Instagram</span><input type="url" id="sns_instagram" placeholder="https://www.instagram.com/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">X（Twitter）</span><input type="url" id="sns_x" placeholder="https://x.com/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">Facebook</span><input type="url" id="sns_facebook" placeholder="https://www.facebook.com/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">LINE</span><input type="url" id="sns_line" placeholder="https://lin.ee/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">YouTube</span><input type="url" id="sns_youtube" placeholder="https://www.youtube.com/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">その他</span><input type="text" id="sns_other" placeholder="サービス名：URL" style="flex:1;"></div>
+        </div>
       </div>
     </div>
 
@@ -1975,7 +1998,15 @@
       </div>
       <div class="field">
         <label>SNS URL<span class="optional">任意</span></label>
-        <input type="text" id="card_sns" placeholder="例：Instagram: @〇〇〇〇">
+        <div class="notice-box" style="margin-bottom:8px;font-size:11px;">名刺に載せたいSNSのURLを入力してください。不要な項目は空欄のままにしてください。</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">Instagram</span><input type="url" id="card_sns_instagram" placeholder="https://www.instagram.com/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">X（Twitter）</span><input type="url" id="card_sns_x" placeholder="https://x.com/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">Facebook</span><input type="url" id="card_sns_facebook" placeholder="https://www.facebook.com/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">LINE</span><input type="url" id="card_sns_line" placeholder="https://lin.ee/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">YouTube</span><input type="url" id="card_sns_youtube" placeholder="https://www.youtube.com/〇〇" style="flex:1;"></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text);width:100px;flex-shrink:0;">その他</span><input type="text" id="card_sns_other" placeholder="サービス名：URL" style="flex:1;"></div>
+        </div>
       </div>
     </div>
 
@@ -2073,9 +2104,6 @@
         <div id="card_employee_msg" style="display:none;margin-top:8px;padding:14px 16px;background:#EBF5FA;border-left:3px solid var(--primary);font-size:12px;line-height:1.7;color:var(--text);">従業員数によって料金が異なります。詳細はフォーム送信後、担当より3営業日以内にご連絡いたします。</div>
       </div>
     </div>
-
-    <div style="margin:0 0 24px 0;">
-
 
     <div class="btn-row">
       <button class="btn btn-secondary" onclick="prevStep(6)">戻る</button>
@@ -2370,11 +2398,13 @@
         if (titleVal || nameVal) fm3.value = (titleVal + (titleVal && nameVal ? '　' : '') + nameVal).trim();
       }
       if (fm4 && !fm4.value) {
-        const contact = document.getElementById('contact_info');
-        if (contact && contact.value) {
-          // 連絡先の1行目だけ入れる
-          fm4.value = contact.value.split('\n')[0];
-        }
+        const phone = document.getElementById('phone_number');
+        if (phone && phone.value) fm4.value = 'TEL ' + phone.value;
+      }
+      const fm5 = document.getElementById('fm5');
+      if (fm5 && !fm5.value) {
+        const email = document.getElementById('email_address');
+        if (email && email.value) fm5.value = 'MAIL ' + email.value;
       }
     }
 
@@ -2384,13 +2414,22 @@
         ['full_name', 'card_name'],
         ['company_name', 'card_corp'],
         ['title', 'card_title'],
-        ['contact_info', 'card_contact'],
       ];
       fields.forEach(([from, to]) => {
         const src = document.getElementById(from);
         const dst = document.getElementById(to);
         if (src && dst && !dst.value) dst.value = src.value;
       });
+      // 連絡先：電話番号・メールアドレスを組み合わせて引き継ぎ
+      const cardContact = document.getElementById('card_contact');
+      if (cardContact && !cardContact.value) {
+        const phone = document.getElementById('phone_number');
+        const email = document.getElementById('email_address');
+        const lines = [];
+        if (phone && phone.value) lines.push('TEL: ' + phone.value);
+        if (email && email.value) lines.push('MAIL: ' + email.value);
+        if (lines.length) cardContact.value = lines.join('\n');
+      }
     }
   }
 
@@ -2484,6 +2523,12 @@
       ['サービス③名', val('s3_name')],
       ['掲載したくない情報', val('no_publish')],
       ['連絡先情報', val('contact_info')],
+      ['Instagram', val('sns_instagram')],
+      ['X（Twitter）', val('sns_x')],
+      ['Facebook', val('sns_facebook')],
+      ['LINE', val('sns_line')],
+      ['YouTube', val('sns_youtube')],
+      ['SNSその他', val('sns_other')],
       ['返信目安', val('reply_time')],
     ], 2);
 
@@ -2520,7 +2565,12 @@
       ['肩書き・役職', val('card_title')],
       ['連絡先', val('card_contact')],
       ['住所', val('card_address')],
-      ['SNS URL', val('card_sns')],
+      ['SNS Instagram', val('card_sns_instagram')],
+      ['SNS X（Twitter）', val('card_sns_x')],
+      ['SNS Facebook', val('card_sns_facebook')],
+      ['SNS LINE', val('card_sns_line')],
+      ['SNS YouTube', val('card_sns_youtube')],
+      ['SNS その他', val('card_sns_other')],
       ['デザイン', radioVal('card_design')],
       ['制作タイミング', radioVal('card_timing')],
     ], 6);
@@ -2590,6 +2640,8 @@
       company_name: document.getElementById('company_name').value || '',
       title: document.getElementById('title').value || '',
       industry: document.getElementById('industry').value || '',
+      email_address: document.getElementById('email_address').value || '',
+      phone_number: document.getElementById('phone_number').value || '',
       target: document.getElementById('target').value || '',
       pain: document.getElementById('pain').value || '',
       result: document.getElementById('result').value || '',
@@ -2609,6 +2661,12 @@
       s3_name: document.getElementById('s3_name').value || '',
       no_publish: document.getElementById('no_publish').value || '',
       contact_info: document.getElementById('contact_info').value || '',
+      sns_instagram: document.getElementById('sns_instagram').value || '',
+      sns_x: document.getElementById('sns_x').value || '',
+      sns_facebook: document.getElementById('sns_facebook').value || '',
+      sns_line: document.getElementById('sns_line').value || '',
+      sns_youtube: document.getElementById('sns_youtube').value || '',
+      sns_other: document.getElementById('sns_other').value || '',
       reply_time: document.getElementById('reply_time').value || '',
       address: document.getElementById('address') ? document.getElementById('address').value : '',
       access: document.getElementById('access') ? document.getElementById('access').value : '',
@@ -2634,7 +2692,12 @@
       card_title: document.getElementById('card_title').value || '',
       card_contact: document.getElementById('card_contact').value || '',
       card_address: document.getElementById('card_address').value || '',
-      card_sns: document.getElementById('card_sns').value || '',
+      card_sns_instagram: document.getElementById('card_sns_instagram').value || '',
+      card_sns_x: document.getElementById('card_sns_x').value || '',
+      card_sns_facebook: document.getElementById('card_sns_facebook').value || '',
+      card_sns_line: document.getElementById('card_sns_line').value || '',
+      card_sns_youtube: document.getElementById('card_sns_youtube').value || '',
+      card_sns_other: document.getElementById('card_sns_other').value || '',
       card_design: (document.querySelector('input[name="card_design"]:checked') || {}).value || '',
       card_timing: (document.querySelector('input[name="card_timing"]:checked') || {}).value || '',
       options: opts.join('、'),
@@ -2746,9 +2809,6 @@
   }
 
   window.addEventListener('DOMContentLoaded', function() {
-    // 初期表示：STEP0をactive
-    document.getElementById('step0').classList.add('active');
-
     document.getElementById('fm_employee').addEventListener('change', function() {
       document.getElementById('fm_employee_msg').style.display = this.checked ? 'block' : 'none';
     });
@@ -2808,18 +2868,18 @@
 
   // 保存対象のフィールドID一覧
   const SAVE_FIELDS = [
-    'full_name','company_name','title','industry','target','pain','result',
+    'full_name','company_name','title','industry','email_address','phone_number','target','pain','result',
     'catchcopy','base_color','color_note','story','value',
     'strength1','strength2','strength3',
     's1_name','s1_desc','s1_time','s1_price',
     's2_name','s2_desc','s2_time','s2_price',
     's3_name','s3_desc','s3_time','s3_price',
-    'no_publish','contact_info','reply_time',
+    'no_publish','contact_info','sns_instagram','sns_x','sns_facebook','sns_line','sns_youtube','sns_other','reply_time',
     'address','access','business_hours','holiday','reserve_contact',
     'corp_name','rep_name2','corp_business',
     'drive_url','gigafile_url',
     'hanko_corp','hanko_role','fm1','fm2','fm3','fm4','fm5',
-    'card_name','card_corp','card_title','card_contact','card_address','card_sns',
+    'card_name','card_corp','card_title','card_contact','card_address','card_sns_instagram','card_sns_x','card_sns_facebook','card_sns_line','card_sns_youtube','card_sns_other',
     'zoom_date1','zoom_date2','zoom_date3','zoom_note'
   ];
 
