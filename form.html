@@ -20,6 +20,44 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* 画像モーダル */
+  .img-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+  .img-modal-overlay.active {
+    display: flex;
+  }
+  .img-modal-inner {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  .img-modal-inner img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    display: block;
+  }
+  .img-modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
   body {
     background: var(--bg);
     color: var(--text);
@@ -234,12 +272,11 @@
 
   .plan-card-inner {
     display: flex;
-    gap: 20px;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .plan-card-text {
-    flex: 1;
     font-size: 12px;
     color: var(--text);
     line-height: 1.8;
@@ -247,8 +284,7 @@
   }
 
   .plan-card-image-wrap {
-    flex-shrink: 0;
-    width: 200px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -256,14 +292,20 @@
 
   .plan-card-image-wrap img {
     width: 100%;
-    height: 130px;
+    height: 360px;
     object-fit: cover;
     border: 1px solid var(--border);
     display: block;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .plan-card-image-wrap img:hover {
+    opacity: 0.85;
   }
 
   .plan-card-link {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--primary);
     text-decoration: underline;
     text-align: right;
@@ -1062,6 +1104,13 @@
   <div id="priceBreakdown" style="font-size:11px;opacity:0.6;margin-left:16px;line-height:1.8;">起業応援セットプラン 165,000円</div>
 </div>
 
+<div id="imgModalOverlay" class="img-modal-overlay">
+  <div class="img-modal-inner">
+    <button class="img-modal-close" onclick="closeImgModal()">✕</button>
+    <img id="imgModalImg" src="" alt="拡大画像">
+  </div>
+</div>
+
 <div class="container">
 
   <!-- Header -->
@@ -1238,8 +1287,8 @@
           </div>
           <div class="plan-card-image-wrap">
             <img id="step1_img_elegant" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="step1_placeholder_elegant" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
-            <a class="plan-card-link" href="https://preview.studio.site/templates/exNWYobqlB" target="_blank" rel="noopener">全体を見る ↗</a>
+            <div id="step1_placeholder_elegant" style="width:100%;height:360px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <a class="plan-card-link" href="https://preview.studio.site/templates/exNWYobqlB" target="_blank" rel="noopener">サンプルサイトを見る ↗</a>
           </div>
         </div>
       </label>
@@ -1263,8 +1312,8 @@
           </div>
           <div class="plan-card-image-wrap">
             <img id="step1_img_natural" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="step1_placeholder_natural" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
-            <a class="plan-card-link" id="step1_img_natural_wrap" href="https://preview.studio.site/templates/ZM3aAK7Oeg" target="_blank" rel="noopener">全体を見る ↗</a>
+            <div id="step1_placeholder_natural" style="width:100%;height:360px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <a class="plan-card-link" id="step1_img_natural_wrap" href="https://preview.studio.site/templates/ZM3aAK7Oeg" target="_blank" rel="noopener">サンプルサイトを見る ↗</a>
           </div>
         </div>
       </label>
@@ -1288,8 +1337,8 @@
           </div>
           <div class="plan-card-image-wrap">
             <img id="step1_img_luxury" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="step1_placeholder_luxury" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
-            <a class="plan-card-link" id="step1_img_luxury_wrap" href="https://preview.studio.site/templates/9xPORPyarR" target="_blank" rel="noopener">全体を見る ↗</a>
+            <div id="step1_placeholder_luxury" style="width:100%;height:360px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <a class="plan-card-link" id="step1_img_luxury_wrap" href="https://preview.studio.site/templates/9xPORPyarR" target="_blank" rel="noopener">サンプルサイトを見る ↗</a>
           </div>
         </div>
       </label>
@@ -1316,8 +1365,8 @@
           </div>
           <div class="plan-card-image-wrap">
             <img id="step1_img_creative" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="step1_placeholder_creative" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
-            <a class="plan-card-link" id="step1_img_creative_wrap" href="https://preview.studio.site/templates/Q1YWjYKamG" target="_blank" rel="noopener">全体を見る ↗</a>
+            <div id="step1_placeholder_creative" style="width:100%;height:360px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <a class="plan-card-link" id="step1_img_creative_wrap" href="https://preview.studio.site/templates/Q1YWjYKamG" target="_blank" rel="noopener">サンプルサイトを見る ↗</a>
           </div>
         </div>
       </label>
@@ -1341,8 +1390,8 @@
           </div>
           <div class="plan-card-image-wrap">
             <img id="step1_img_navy" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="step1_placeholder_navy" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
-            <a class="plan-card-link" id="step1_img_navy_wrap" href="https://preview.studio.site/templates/7bXqz7DaDd" target="_blank" rel="noopener">全体を見る ↗</a>
+            <div id="step1_placeholder_navy" style="width:100%;height:360px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <a class="plan-card-link" id="step1_img_navy_wrap" href="https://preview.studio.site/templates/7bXqz7DaDd" target="_blank" rel="noopener">サンプルサイトを見る ↗</a>
           </div>
         </div>
       </label>
@@ -1366,8 +1415,8 @@
           </div>
           <div class="plan-card-image-wrap">
             <img id="step1_img_sharp" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="step1_placeholder_sharp" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
-            <a class="plan-card-link" id="step1_img_sharp_wrap" href="https://preview.studio.site/templates/EJgqe65akL" target="_blank" rel="noopener">全体を見る ↗</a>
+            <div id="step1_placeholder_sharp" style="width:100%;height:360px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <a class="plan-card-link" id="step1_img_sharp_wrap" href="https://preview.studio.site/templates/EJgqe65akL" target="_blank" rel="noopener">サンプルサイトを見る ↗</a>
           </div>
         </div>
       </label>
@@ -2593,11 +2642,133 @@
 
   window.addEventListener('DOMContentLoaded', loadImages);
 
+  // ===== 画像モーダル =====
+  function openImgModal(src) {
+    const overlay = document.getElementById('imgModalOverlay');
+    const img = document.getElementById('imgModalImg');
+    img.src = src;
+    overlay.classList.add('active');
+  }
+  function closeImgModal() {
+    document.getElementById('imgModalOverlay').classList.remove('active');
+  }
+  window.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('imgModalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeImgModal();
+    });
+    // 画像クリックでモーダル表示
+    document.addEventListener('click', function(e) {
+      if (e.target.matches('.plan-card-image-wrap img') && e.target.src && !e.target.src.endsWith('form.html')) {
+        openImgModal(e.target.src);
+      }
+    });
+  });
+
   // STEPが表示されるたびに画像を再適用
   const _origShowStep = window.showStep;
   window.showStep = function(n) {
     if (_origShowStep) _origShowStep(n);
     setTimeout(loadImages, 100);
+  };
+
+  // ===== 自動保存・復元 =====
+  const SAVE_KEY = 'kigyou_form_data';
+
+  // 保存対象のフィールドID一覧
+  const SAVE_FIELDS = [
+    'full_name','company_name','title','industry','target','pain','result',
+    'catchcopy','base_color','color_note','story','value',
+    'strength1','strength2','strength3',
+    's1_name','s1_desc','s1_time','s1_price',
+    's2_name','s2_desc','s2_time','s2_price',
+    's3_name','s3_desc','s3_time','s3_price',
+    'no_publish','contact_info','reply_time',
+    'address','access','business_hours','holiday','reserve_contact',
+    'corp_name','rep_name2','corp_business',
+    'drive_url','gigafile_url',
+    'hanko_corp','hanko_role','fm1','fm2','fm3','fm4','fm5',
+    'card_name','card_corp','card_title','card_contact','card_address','card_sns',
+    'zoom_date1','zoom_date2','zoom_date3','zoom_note'
+  ];
+
+  function saveForm() {
+    const data = {};
+    // テキスト・テキストエリア・select
+    SAVE_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    // ラジオボタン
+    ['hanko_font','card_design','card_timing'].forEach(name => {
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      if (el) data['radio_' + name] = el.value;
+    });
+    // チェックボックス
+    ['opt_meishi','opt_logo','fm_employee','card_employee'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data['check_' + id] = el.checked;
+    });
+    // プラン選択
+    if (selectedPlan) data['selectedPlan'] = selectedPlan;
+
+    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+  }
+
+  function restoreForm() {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) return;
+    let data;
+    try { data = JSON.parse(raw); } catch(e) { return; }
+
+    // テキスト・テキストエリア・select
+    SAVE_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    // ラジオボタン
+    ['hanko_font','card_design','card_timing'].forEach(name => {
+      const val = data['radio_' + name];
+      if (val) {
+        const el = document.querySelector(`input[name="${name}"][value="${val}"]`);
+        if (el) el.checked = true;
+      }
+    });
+    // チェックボックス
+    ['opt_meishi','opt_logo','fm_employee','card_employee'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data['check_' + id] !== undefined) {
+        el.checked = data['check_' + id];
+        // 従業員メッセージの表示状態を復元
+        const msg = document.getElementById(id + '_msg');
+        if (msg) msg.style.display = el.checked ? 'block' : 'none';
+      }
+    });
+    // プラン選択
+    if (data['selectedPlan']) {
+      const card = document.querySelector(`.plan-card input[value="${data['selectedPlan']}"]`);
+      if (card) {
+        selectedPlan = data['selectedPlan'];
+        card.closest('.plan-card').classList.add('selected');
+        card.checked = true;
+      }
+    }
+  }
+
+  // 入力のたびに自動保存
+  window.addEventListener('DOMContentLoaded', function() {
+    // 復元
+    restoreForm();
+
+    // input・change・textareaの変更を監視
+    document.addEventListener('input', saveForm);
+    document.addEventListener('change', saveForm);
+  });
+
+  // 送信完了後にデータ削除
+  const _origSubmitForm = window.submitForm;
+  window.submitForm = function() {
+    localStorage.removeItem(SAVE_KEY);
+    if (_origSubmitForm) _origSubmitForm();
   };
 </script>
 </body>
