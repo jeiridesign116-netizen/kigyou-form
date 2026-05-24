@@ -366,7 +366,7 @@
     display: block;
     color: var(--primary);
     font-size: 13px;
-    margin-bottom: 8px;
+    margin-bottom: 0;
     letter-spacing: 0.05em;
   }
 
@@ -502,8 +502,9 @@
 
   .plan-set-image-wrap {
     width: 100%;
-    height: 220px;
+    aspect-ratio: 1280 / 750;
     overflow: hidden;
+    position: relative;
   }
 
   .plan-set-image-placeholder {
@@ -519,8 +520,8 @@
   }
 
   .plan-set-title {
-    padding: 16px 24px 8px;
-    font-size: 14px;
+    padding: 16px 24px 8px 32px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--primary);
     letter-spacing: 0.05em;
@@ -528,7 +529,7 @@
 
   .plan-set-list {
     list-style: none;
-    padding: 0 24px 24px;
+    padding: 0 24px 24px 24px;
     margin: 0;
   }
 
@@ -557,7 +558,7 @@
   }
 
   .plan-set-item-name::before {
-    content: '—';
+    content: '';
     color: var(--primary);
     margin-right: 8px;
   }
@@ -726,6 +727,8 @@
     height: 18px;
     accent-color: var(--primary);
     cursor: pointer;
+    vertical-align: middle;
+    flex-shrink: 0;
   }
 
   /* Notice box */
@@ -987,8 +990,7 @@
   /* STEP4 提出方法カード */
   .step4-method-card {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    flex-direction: column;
     padding: 14px 16px;
     border: 2px solid var(--border);
     background: var(--white);
@@ -1038,6 +1040,10 @@
     margin-left: 6px;
     vertical-align: middle;
   }
+  /* 名刺カード専用 */
+  #cardDesignCards .plan-card-header {
+    margin-bottom: 12px;
+  }
 </style>
 </head>
 <body>
@@ -1045,20 +1051,22 @@
 <!-- 金額フッター -->
 <div class="price-footer">
   <div>
-    <div class="price-footer-label">お支払い合計金額</div>
-    <div>
-      <span class="price-footer-amount" id="totalPrice">150,000円</span>
+    <div class="price-footer-label">見積もり金額</div>
+    <div style="display:flex;align-items:baseline;gap:8px;">
+      <span style="font-size:11px;opacity:0.5;text-decoration:line-through;">235,400円</span>
+      <span style="font-size:11px;color:#FF8C00;font-weight:700;">30%OFF</span>
+      <span class="price-footer-amount" id="totalPrice">165,000円</span>
       <span class="price-footer-detail">（税込）</span>
     </div>
   </div>
-  <div id="priceBreakdown" style="font-size:11px;opacity:0.6;margin-left:16px;line-height:1.8;">起業応援セットプラン 150,000円</div>
+  <div id="priceBreakdown" style="font-size:11px;opacity:0.6;margin-left:16px;line-height:1.8;">起業応援セットプラン 165,000円</div>
 </div>
 
 <div class="container">
 
   <!-- Header -->
   <div class="form-header">
-    <h1>起業応援セットプラン<br>ヒアリングフォーム</h1>
+    <h1>起業応援セットプラン５<br>ヒアリングフォーム</h1>
     <p>全項目をご記入の上、送信してください</p>
   </div>
 
@@ -1108,27 +1116,34 @@
       <div class="plan-set-image-wrap">
         <div class="plan-set-image-placeholder">写真</div>
       </div>
-      <div class="plan-set-title">起業応援セットプランに含まれるもの</div>
+      <div style="margin:0 0 4px 0;padding:12px 32px;background:#EBF5FA;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span style="color:#006D93;opacity:0.8;font-size:13px;">通常価格合計</span>
+        <span style="color:#006D93;opacity:0.8;font-size:13px;text-decoration:line-through;">235,400円（税込）</span>
+        <span style="color:#FF8C00;font-weight:700;font-size:13px;">→ 30%OFF</span>
+        <span style="color:#006D93;opacity:0.8;font-size:13px;">セット価格</span>
+        <span style="color:#006D93;font-weight:700;font-size:16px;">165,000円（税込）</span>
+      </div>
+      <div class="plan-set-title">起業応援セットプラン５！に含まれるもの</div>
       <ul class="plan-set-list">
         <li>
-          <span class="plan-set-item-name">柘植ハンコ　3本</span>
+          <span class="plan-set-item-name">① 薩摩本柘(国産) 法人用３本セット</span>
           <span class="plan-set-item-desc">銀行印・実印・角印の3本セット（印鑑ケース付き）。起業に必要な印鑑が一式揃います。</span>
         </li>
         <li>
-          <span class="plan-set-item-name">名刺　片面印刷100枚セット</span>
+          <span class="plan-set-item-name">② 組み合わせゴム印(フリーメイト) 5枚</span>
+          <span class="plan-set-item-desc">住所・会社名・氏名・電話番号・インボイス番号を組み合わせて使えるゴム印。書類・封筒への押印がスムーズになります。</span>
+        </li>
+        <li>
+          <span class="plan-set-item-name">③ 本格名刺デザイン&amp;印刷100枚セット(両面) <span style="background:#E8F4F0;color:#0F6E56;font-size:11px;padding:2px 4px;border-radius:4px;font-weight:500;display:inline-block;">プロデザイナー担当</span></span>
           <span class="plan-set-item-desc">起業のスタートに欠かせない名刺を100枚お届け。初めての対面・商談の場で自信を持って渡せます。</span>
         </li>
         <li>
-          <span class="plan-set-item-name">フリーメイト（組み合わせゴム印）　5枚</span>
-          <span class="plan-set-item-desc">住所・会社名・氏名・電話番号などを組み合わせて使えるゴム印。書類・封筒への押印がスムーズになります。</span>
-        </li>
-        <li>
-          <span class="plan-set-item-name">LST撮影会</span>
-          <span class="plan-set-item-desc">起業・事業に必要な経営者プロフィール写真をプロが撮影。撮影データはインタビュー制作にも活用でき、LSTのSNSでもご紹介します。</span>
-        </li>
-        <li>
-          <span class="plan-set-item-name">ホームページ1枚（LP）</span>
+          <span class="plan-set-item-name">④ ホームページ1枚(LP) <span style="background:#E8F4F0;color:#0F6E56;font-size:11px;padding:2px 4px;border-radius:4px;font-weight:500;display:inline-block;">プロデザイナー担当</span></span>
           <span class="plan-set-item-desc">起業初日から使えるホームページ。あなたのサービス・想い・連絡先を1ページにまとめ、ビジネスの第一歩を支えます。</span>
+        </li>
+        <li>
+          <span class="plan-set-item-name">⑤ ヘアメイクつきプロフィール写真撮影会(LST)</span>
+          <span class="plan-set-item-desc">起業・事業に必要な経営者プロフィール写真をプロが撮影。撮影データはインタビュー制作にも活用でき、弊社のオウンドメディアでご紹介します。（LEADING STYLE TOKYO）</span>
         </li>
       </ul>
     </div>
@@ -1145,15 +1160,13 @@
       <label class="step0-check-card" id="check_card_b" onclick="selectIntent('b')">
         <div class="step0-check-indicator" id="check_ind_b"></div>
         <div class="step0-check-text">
-          <div class="step0-check-label">ページの追加・ドメイン設定・ブログ更新機能なども追加したい</div>
+          <div class="step0-check-label" style="font-size:13.5px;">オンライン相談希望（1回 1時間 ＋5,000円）</div>
+          <div style="font-size:12px;color:var(--text);opacity:0.7;margin-top:4px;">どのデザインにすべきか迷っている／サイトのイメージや質問項目を相談しながら決めたい／サイトページ追加・独自ドメイン設定・Googleアナリティクス設定をご希望の場合（起業応援プラン内には含まれません）</div>
         </div>
       </label>
 
       <div id="intent_msg_b" style="display:none;" class="step0-alert">
-        <div class="step0-alert-title">オンライン相談（1回 1時間）が必要です</div>
-        <div class="step0-alert-price">料金：<strong>5,000円</strong>（税込）</div>
-        追加ページ・ドメイン設定・ブログ更新機能をご希望の場合は、まずZoomにてお打ち合わせを行います。<br>
-        下記より基本情報とZoom日程の候補をご入力の上、送信してください。
+        打ち合わせをよりスムーズに進めるため、基本情報とZoom日程の候補をできる限りご入力ください。不明な部分は空欄のまま送信いただいて構いません。
       </div>
 
       <div id="intent_btn_a" style="display:none;" class="btn-row" style="justify-content:flex-end;">
@@ -1183,6 +1196,22 @@
         <div style="font-size:12px;color:var(--text);line-height:1.8;">来店不要でサービスを提供している方　例：コンサル・コーチング・デザイナー・士業・フリーランスなど</div>
       </div>
       <div style="font-size:12px;color:var(--text);">※ご自身の業種に合わせてお選びください。店舗あり・なしのみ間違えないようご注意ください。</div>
+
+    </div>
+
+    <div class="plan-notice" style="margin-bottom:12px;">
+      <strong>デザインサンプルについて</strong>
+      サンプル選択後の質問項目をもとに、選んでいただいたデザインサンプルをベースとして、業種に合わせて内容・文章・写真・色・フォントなどを変更して制作します。構成（レイアウト）とアニメーションのみお好みでお選びください。
+    </div>
+    <div class="plan-notice" style="margin-bottom:20px;">
+      <strong>注意事項</strong>
+      — サイト完成後の確認・デザイン修正は1回まで（作り直し不可）<br>
+      — ノーコードSTUDIOの無料アカウントで制作・公開（公開初期費用0円）<br>
+      — サイトURLは「https://〇〇.studio.site」形式（サイト名は会社名から作ります）<br>
+      — 無料プランのため、サイト左下にSTUDIOの広告バーが表示されます<br>
+      — ニュース・ブログなどの更新機能はありません<br>
+      — サイトデータの譲渡・移管はできません<br>
+      — 保守管理はありませんが、デザイナーのアカウントで安全に制作・保管します
     </div>
 
     <div class="plan-cards" id="planCards">
@@ -1233,7 +1262,8 @@
             <div class="plan-card-genre">向いている業種例：エステ・整体・ヨガ・美容・セラピスト</div>
           </div>
           <div class="plan-card-image-wrap">
-            <div style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="step1_img_natural" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
+            <div id="step1_placeholder_natural" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
             <a class="plan-card-link" id="step1_img_natural_wrap" href="https://preview.studio.site/templates/ZM3aAK7Oeg" target="_blank" rel="noopener">全体を見る ↗</a>
           </div>
         </div>
@@ -1257,7 +1287,8 @@
             <div class="plan-card-genre">向いている業種例：レストラン・カフェ・バー・ホテル・料亭</div>
           </div>
           <div class="plan-card-image-wrap">
-            <div style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="step1_img_luxury" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
+            <div id="step1_placeholder_luxury" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
             <a class="plan-card-link" id="step1_img_luxury_wrap" href="https://preview.studio.site/templates/9xPORPyarR" target="_blank" rel="noopener">全体を見る ↗</a>
           </div>
         </div>
@@ -1284,19 +1315,20 @@
             <div class="plan-card-genre">向いている業種例：デザイナー・Web制作・クリエイター・IT系</div>
           </div>
           <div class="plan-card-image-wrap">
-            <div style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="step1_img_creative" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
+            <div id="step1_placeholder_creative" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
             <a class="plan-card-link" id="step1_img_creative_wrap" href="https://preview.studio.site/templates/Q1YWjYKamG" target="_blank" rel="noopener">全体を見る ↗</a>
           </div>
         </div>
       </label>
 
-      <!-- 店舗なし B：ネイビー・パーソナルブランド -->
+      <!-- 店舗なし B：スタイリッシュ・パーソナルブランド -->
       <label class="plan-card" onclick="selectPlan(this, 'nostore_b')">
         <input type="radio" name="plan" value="nostore_b">
         <div class="plan-card-header">
           <div class="radio-indicator"></div>
           <div class="plan-card-title">店舗なしデザインサンプル B</div>
-          <span class="plan-card-tag">ネイビー・パーソナルブランド</span>
+          <span class="plan-card-tag">スタイリッシュ・パーソナルブランド</span>
         </div>
         <div class="plan-card-inner">
           <div class="plan-card-text">
@@ -1308,7 +1340,8 @@
             <div class="plan-card-genre">向いている業種例：コーチ・コンサル・講師・SNS運用・個人事業主</div>
           </div>
           <div class="plan-card-image-wrap">
-            <div style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="step1_img_navy" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
+            <div id="step1_placeholder_navy" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
             <a class="plan-card-link" id="step1_img_navy_wrap" href="https://preview.studio.site/templates/7bXqz7DaDd" target="_blank" rel="noopener">全体を見る ↗</a>
           </div>
         </div>
@@ -1332,39 +1365,16 @@
             <div class="plan-card-genre">向いている業種例：経営者・スタートアップ・新規事業・コンサルティング</div>
           </div>
           <div class="plan-card-image-wrap">
-            <div style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="step1_img_sharp" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
+            <div id="step1_placeholder_sharp" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
             <a class="plan-card-link" id="step1_img_sharp_wrap" href="https://preview.studio.site/templates/EJgqe65akL" target="_blank" rel="noopener">全体を見る ↗</a>
           </div>
         </div>
       </label>
 
-      <!-- オンライン相談 -->
-      <div class="plan-notice" style="margin-top:24px;">
-        <strong>共通注意事項</strong>
-        選択したデザインサンプルをベースに、業種に合わせて内容・文章・写真の配置を変更して制作します。構成（レイアウト）のみお好みでお選びください。<br>
-        サイト完成後の確認・デザイン修正は1回まで（作り直し不可）<br>
-        ノーコードSTUDIOの無料アカウントで制作・公開（公開初期費用0円）<br>
-        サイトURLは「https://〇〇.studio.site」形式（サイト名は会社名から作ります）<br>
-        無料プランのため、サイト左下にノーコードSTUDIOの広告バーが表示されます
-      </div>
 
-      <div class="store-section-divider" style="margin-top:24px;">相談希望</div>
 
-      <!-- オンライン相談選択時メッセージ -->
-      <div id="onlineMsg" style="display:none;color:#C0392B;font-size:13px;font-weight:700;padding:12px 0;line-height:1.8;">
-        入力できる部分は入力してください。不明な部分は空欄のまま送信いただいて構いません。<br>打ち合わせをよりスムーズに進めるため、できる限りご記入をお願いします。
-      </div>
 
-      <label class="plan-card" onclick="selectPlan(this, 'online')">
-        <input type="radio" name="plan" value="online">
-        <div class="plan-card-header">
-          <div class="radio-indicator"></div>
-          <div class="plan-card-title">オンライン相談希望（1回 1時間 ＋5,000円）</div>
-        </div>
-        <div class="plan-card-text" style="padding-left:32px;">
-          どのデザインにすべきか迷っている／サイトのイメージや質問項目を相談しながら決めたい／サイトページ追加・独自ドメイン設定・Googleアナリティクス設定をご希望の場合（起業応援プラン内には含まれません）
-        </div>
-      </label>
 
     </div>
 
@@ -1725,40 +1735,40 @@
     </div>
 
     <div class="notice-box" style="margin-bottom:24px;">
-      <strong style="display:block;color:var(--primary);margin-bottom:10px;">フォルダ分けのお願い</strong>
-      以下の種類ごとに画像を分けてご提出ください。<br><br>
-      📁 代表写真（現時点でお持ちの写真で構いません。LST撮影会後に差し替えます）<br>
-      📁 スタッフ写真（任意）<br>
-      📁 店舗外観・内観（任意）<br>
-      📁 サービス・施術中の写真（任意）<br>
-      📁 お客様の写真（任意・掲載許可済みのもの）<br>
-      📁 ロゴ（任意）<br>
-      📁 その他（任意）
+      <strong style="display:block;color:var(--primary);margin-bottom:5px;">フォルダ分けのお願い</strong>
+      以下の種類ごとに画像を分けてご提出ください。<br>
+      — 代表写真（現時点でお持ちの写真で構いません。LST撮影会後に差し替えます）<br>
+      — スタッフ写真（任意）<br>
+      — 店舗外観・内観（任意）<br>
+      — サービス・施術中の写真（任意）<br>
+      — お客様の写真（任意・掲載許可済みのもの）<br>
+      — ロゴ（任意）<br>
+      — その他（任意）
     </div>
 
     <div class="field">
       <label>提出方法を選んでください<span class="required">必須</span></label>
       <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
         <label class="step4-method-card" id="method_card_drive" onclick="selectImageMethod('drive')">
-          <div class="step4-method-radio" id="method_radio_drive"></div>
-          <div>
-            <div class="step4-method-title">📂 Googleドライブ <span class="step4-method-recommend">推奨</span></div>
-            <div class="step4-method-desc">フォルダをまとめて共有できます。Google アカウントをお持ちの方におすすめです。</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="step4-method-radio" id="method_radio_drive"></div>
+            <div class="step4-method-title">Googleドライブ <span class="step4-method-recommend">推奨</span></div>
           </div>
+          <div class="step4-method-desc" style="margin-top:6px;padding-left:28px;">フォルダをまとめて共有できます。Googleアカウントをお持ちの方におすすめです。</div>
         </label>
         <label class="step4-method-card" id="method_card_gigafile" onclick="selectImageMethod('gigafile')">
-          <div class="step4-method-radio" id="method_radio_gigafile"></div>
-          <div>
-            <div class="step4-method-title">📦 GigaFile便</div>
-            <div class="step4-method-desc">無料で大容量ファイルを送れます。アカウント不要で使えます。</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="step4-method-radio" id="method_radio_gigafile"></div>
+            <div class="step4-method-title">GigaFile便</div>
           </div>
+          <div class="step4-method-desc" style="margin-top:6px;padding-left:28px;">無料で大容量ファイルを送れます。アカウント不要で使えます。</div>
         </label>
         <label class="step4-method-card" id="method_card_email" onclick="selectImageMethod('email')">
-          <div class="step4-method-radio" id="method_radio_email"></div>
-          <div>
-            <div class="step4-method-title">📧 メール送付</div>
-            <div class="step4-method-desc">画像ファイルを直接メールに添付して送る方法です。</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="step4-method-radio" id="method_radio_email"></div>
+            <div class="step4-method-title">メール送付</div>
           </div>
+          <div class="step4-method-desc" style="margin-top:6px;padding-left:28px;">画像ファイルを直接メールに添付して送る方法です。</div>
         </label>
       </div>
     </div>
@@ -1779,7 +1789,7 @@
 
     <!-- メール送付案内 -->
     <div id="input_email" style="display:none;padding:14px 16px;background:#EBF5FA;border-left:3px solid var(--primary);margin-top:12px;font-size:12px;line-height:1.7;">
-      <strong style="display:block;color:var(--primary);margin-bottom:6px;font-size:12px;">📧 メール送付について</strong>
+      <strong style="display:block;color:var(--primary);margin-bottom:6px;font-size:12px;">メール送付について</strong>
       このフォーム送信後に確認メールが届きます。<br>
       その確認メールに返信する形で、画像ファイルを添付して送信してください。<br>
       <span style="color:var(--text);opacity:0.8;">送信先：sugikado@f-3.jp</span>
@@ -1802,26 +1812,19 @@
         <label>材質</label>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;" id="hankoCards">
 
-          <div class="hanko-card" onclick="selectHanko(this, '柘植ハンコ3本（セット内容）')" style="flex:1;min-width:160px;border:1px solid var(--border);background:var(--white);padding:16px;cursor:pointer;transition:all 0.2s;text-align:center;">
-            <img id="hanko_img_tsuge" src="" alt="柘植ハンコ 3本" style="width:100%;height:100px;object-fit:cover;margin-bottom:12px;display:none;">
-            <div id="hanko_placeholder_tsuge" style="width:100%;height:100px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:11px;color:#999;">画像</div>
-            <div style="font-weight:700;font-size:13px;color:var(--primary);margin-bottom:4px;">柘植ハンコ 3本</div>
-            <div style="font-size:12px;color:var(--text);opacity:0.7;">セットに含まれる</div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-top:6px;">+0円</div>
-          </div>
-
-          <div class="hanko-card" onclick="selectHanko(this, '薩摩本柘 3本セット（+8,800円税込）')" style="flex:1;min-width:160px;border:1px solid var(--border);background:var(--white);padding:16px;cursor:pointer;transition:all 0.2s;text-align:center;">
-            <img id="hanko_img_satsuma" src="" alt="薩摩本柘 3本セット" style="width:100%;height:100px;object-fit:cover;margin-bottom:12px;display:none;">
+          <div class="hanko-card" onclick="selectHanko(this, '薩摩本柘 3本セット（セット内容）')" style="flex:1;min-width:160px;border:1px solid var(--border);background:var(--white);padding:16px;cursor:pointer;transition:all 0.2s;text-align:center;">
+            <img id="hanko_img_satsuma" src="" alt="薩摩本柘 3本セット" style="width:100%;height:auto;object-fit:contain;margin-bottom:12px;display:none;">
             <div id="hanko_placeholder_satsuma" style="width:100%;height:100px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:11px;color:#999;">画像</div>
             <div style="font-weight:700;font-size:13px;color:var(--primary);margin-bottom:4px;">薩摩本柘 3本セット</div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-top:6px;">+8,800円（税込）</div>
+            <div style="font-size:12px;color:var(--text);opacity:0.7;">セットに含まれる</div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-top:6px;">+0円（税込）</div>
           </div>
 
-          <div class="hanko-card" onclick="selectHanko(this, '黒水牛 3本セット（+22,000円税込）')" style="flex:1;min-width:160px;border:1px solid var(--border);background:var(--white);padding:16px;cursor:pointer;transition:all 0.2s;text-align:center;">
-            <img id="hanko_img_kuroushi" src="" alt="黒水牛 3本セット" style="width:100%;height:100px;object-fit:cover;margin-bottom:12px;display:none;">
+          <div class="hanko-card" onclick="selectHanko(this, '黒水牛 3本セット（+13,200円税込）')" style="flex:1;min-width:160px;border:1px solid var(--border);background:var(--white);padding:16px;cursor:pointer;transition:all 0.2s;text-align:center;">
+            <img id="hanko_img_kuroushi" src="" alt="黒水牛 3本セット" style="width:100%;height:auto;object-fit:contain;margin-bottom:12px;display:none;">
             <div id="hanko_placeholder_kuroushi" style="width:100%;height:100px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:11px;color:#999;">画像</div>
             <div style="font-weight:700;font-size:13px;color:var(--primary);margin-bottom:4px;">黒水牛 3本セット</div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-top:6px;">+22,000円（税込）</div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-top:6px;">+13,200円（税込）</div>
           </div>
 
         </div>
@@ -1869,11 +1872,16 @@
         <div id="freemate_placeholder" style="width:180px;height:140px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
         </div>
       </div>
-      <div class="field"><label>1枚目<span class="required">必須</span></label><input type="text" id="fm1" placeholder="例：〒116-0002 東京都荒川区荒川1-2-3"></div>
-      <div class="field"><label>2枚目<span class="required">必須</span></label><input type="text" id="fm2" placeholder="例：株式会社〇〇〇〇"></div>
-      <div class="field"><label>3枚目<span class="required">必須</span></label><input type="text" id="fm3" placeholder="例：代表取締役 〇〇 〇〇"></div>
-      <div class="field"><label>4枚目<span class="optional">任意</span></label><input type="text" id="fm4" placeholder="例：TEL 03-1234-5678"></div>
-      <div class="field"><label>5枚目<span class="optional">任意</span></label><input type="text" id="fm5" placeholder="例：登録番号 T1234567890123"></div>
+      <div class="field"><label>1枚目　住所<span class="required">必須</span></label><input type="text" id="fm1" placeholder="例：〒116-0002 東京都荒川区荒川1-2-3"></div>
+      <div class="field"><label>2枚目　会社名<span class="required">必須</span></label><input type="text" id="fm2" placeholder="例：株式会社〇〇〇〇"></div>
+      <div class="field"><label>3枚目　役職・氏名<span class="required">必須</span></label><input type="text" id="fm3" placeholder="例：代表取締役 〇〇 〇〇"></div>
+      <div class="field"><label>4枚目　電話番号</label><input type="text" id="fm4" placeholder="例：TEL 03-1234-5678"></div>
+      <div class="field"><label>5枚目　インボイス登録番号orメールアドレスなど</label><input type="text" id="fm5" placeholder="例：T1234567890123"></div>
+
+      <div style="margin-top:8px;">
+        <div class="radio-group"><label class="radio-item"><input type="radio" id="fm_employee" name="fm_employee_radio"> 従業員用のフリーメイトも希望する</label></div>
+        <div id="fm_employee_msg" style="display:none;margin-top:8px;padding:14px 16px;background:#EBF5FA;border-left:3px solid var(--primary);font-size:12px;line-height:1.7;color:var(--text);">従業員数によって料金が異なります。詳細はフォーム送信後、担当より3営業日以内にご連絡いたします。</div>
+      </div>
     </div>
 
     <div class="btn-row">
@@ -1916,18 +1924,33 @@
       </div>
     </div>
 
+    <div class="plan-notice" style="margin-bottom:12px;">
+      <strong>名刺デザインサンプルについて</strong>
+      サンプル選択後の質問項目をもとに、情報を追加していきます。業種に合わせて、色や文字の種類を変更して制作します。構成（レイアウト）のみお好みでお選びください。
+    </div>
+    <div class="plan-notice" style="margin-bottom:20px;">
+      <strong>写真について</strong>
+      写真をサンプル内に追加ご希望の方はチェックをお願いします。サンプル内に写真を追加いたします。
+      <div style="margin-top:10px;">
+        <label class="radio-item"><input type="checkbox" id="card_photo" style="width:18px;height:18px;accent-color:var(--primary);"> 名刺に写真を追加希望する</label>
+      </div>
+    </div>
+
     <div class="plan-cards" id="cardDesignCards">
       <label class="plan-card" onclick="selectCard(this, 'yoko_a')">
         <input type="radio" name="card_design" value="yoko_a">
         <div class="plan-card-header">
           <div class="radio-indicator"></div>
           <div class="plan-card-title">横型名刺デザインサンプル A</div>
+          <span class="plan-card-tag">スタイリッシュ・シンプル</span>
         </div>
         <div class="plan-card-inner">
-          <div class="plan-card-text"></div>
+          <div class="plan-card-text">
+            <div class="plan-card-genre">向いている業種：IT・コンサル・スタートアップ・個人事業主</div>
+          </div>
           <div class="plan-card-image-wrap">
-            <img id="meishi_img_yoko_a" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="meishi_placeholder_yoko_a" style="width:100%;height:80px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="meishi_img_yoko_a" src="" alt="" style="width:100%;height:auto;object-fit:contain;display:none;border:1px solid var(--border);">
+            <div id="meishi_placeholder_yoko_a" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
           </div>
         </div>
       </label>
@@ -1936,12 +1959,15 @@
         <div class="plan-card-header">
           <div class="radio-indicator"></div>
           <div class="plan-card-title">横型名刺デザインサンプル B</div>
+          <span class="plan-card-tag">プロフェッショナル・情報量多め</span>
         </div>
         <div class="plan-card-inner">
-          <div class="plan-card-text"></div>
+          <div class="plan-card-text">
+            <div class="plan-card-genre">向いている業種：士業・経営者・複数事業を持つ方</div>
+          </div>
           <div class="plan-card-image-wrap">
-            <img id="meishi_img_yoko_b" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="meishi_placeholder_yoko_b" style="width:100%;height:80px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="meishi_img_yoko_b" src="" alt="" style="width:100%;height:auto;object-fit:contain;display:none;border:1px solid var(--border);">
+            <div id="meishi_placeholder_yoko_b" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
           </div>
         </div>
       </label>
@@ -1950,12 +1976,15 @@
         <div class="plan-card-header">
           <div class="radio-indicator"></div>
           <div class="plan-card-title">縦型名刺デザインサンプル A</div>
+          <span class="plan-card-tag">ミニマル・上品</span>
         </div>
         <div class="plan-card-inner">
-          <div class="plan-card-text"></div>
+          <div class="plan-card-text">
+            <div class="plan-card-genre">向いている業種：コーチ・講師・パーソナルブランド</div>
+          </div>
           <div class="plan-card-image-wrap">
-            <img id="meishi_img_tate_a" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="meishi_placeholder_tate_a" style="width:100%;height:80px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="meishi_img_tate_a" src="" alt="" style="width:100%;height:auto;object-fit:contain;display:none;border:1px solid var(--border);">
+            <div id="meishi_placeholder_tate_a" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
           </div>
         </div>
       </label>
@@ -1964,12 +1993,15 @@
         <div class="plan-card-header">
           <div class="radio-indicator"></div>
           <div class="plan-card-title">縦型名刺デザインサンプル B</div>
+          <span class="plan-card-tag">クラシック・格式ある</span>
         </div>
         <div class="plan-card-inner">
-          <div class="plan-card-text"></div>
+          <div class="plan-card-text">
+            <div class="plan-card-genre">向いている業種：士業・経営者・伝統産業・和を意識した業種</div>
+          </div>
           <div class="plan-card-image-wrap">
-            <img id="meishi_img_tate_b" src="" alt="" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
-            <div id="meishi_placeholder_tate_b" style="width:100%;height:80px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+            <img id="meishi_img_tate_b" src="" alt="" style="width:100%;height:auto;object-fit:contain;display:none;border:1px solid var(--border);">
+            <div id="meishi_placeholder_tate_b" style="width:100%;height:130px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
           </div>
         </div>
       </label>
@@ -1981,9 +2013,14 @@
         <div class="radio-group">
           <label class="radio-item"><input type="radio" name="card_timing" value="サイト完成後に制作"> サイト完成後に制作（サイトURLを名刺に記載）</label>
           <label class="radio-item"><input type="radio" name="card_timing" value="写真完了次第すぐ制作"> 写真撮影完了次第すぐ制作（サイトURLなし）</label>
+          <label class="radio-item"><input type="radio" id="card_employee" name="card_employee_radio"> 従業員用の名刺も希望する</label>
         </div>
+        <div id="card_employee_msg" style="display:none;margin-top:8px;padding:14px 16px;background:#EBF5FA;border-left:3px solid var(--primary);font-size:12px;line-height:1.7;color:var(--text);">従業員数によって料金が異なります。詳細はフォーム送信後、担当より3営業日以内にご連絡いたします。</div>
       </div>
     </div>
+
+    <div style="margin:0 0 24px 0;">
+
 
     <div class="btn-row">
       <button class="btn btn-secondary" onclick="prevStep(6)">戻る</button>
@@ -2058,7 +2095,7 @@
   let zoomAdded = false;
 
   function updatePrice() {
-    let base = 150000;
+    let base = 165000;
     let details = ['起業応援セットプラン 150,000円'];
 
     // オンライン相談（プラン選択）
@@ -2075,12 +2112,9 @@
 
     // ハンコ材質
     const hankoVal = document.getElementById('hanko_material') ? document.getElementById('hanko_material').value : '';
-    if (hankoVal.includes('薩摩本柘')) {
-      base += 8800;
-      details.push('薩摩本柘 3本セット +8,800円');
-    } else if (hankoVal.includes('黒水牛')) {
-      base += 22000;
-      details.push('黒水牛 3本セット +22,000円');
+    if (hankoVal.includes('黒水牛')) {
+      base += 13200;
+      details.push('黒水牛 3本セット +13,200円');
     }
 
     // オプション
@@ -2487,7 +2521,7 @@
         if (images['step0_plan']) {
           const el = document.querySelector('.plan-set-image-placeholder');
           if (el) {
-            el.outerHTML = '<img src="' + images['step0_plan'] + '" style="width:100%;height:100%;object-fit:cover;display:block;" alt="起業応援セットプラン">';
+            el.outerHTML = '<img src="' + images['step0_plan'] + '" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0;" alt="起業応援セットプラン">';
           }
         }
         // STEP1 プランカード
@@ -2530,8 +2564,32 @@
           }
         });
       })
-      .catch(e => console.log('画像読み込みエラー:', e));
+      .catch(e => {});
   }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('fm_employee').addEventListener('change', function() {
+      document.getElementById('fm_employee_msg').style.display = this.checked ? 'block' : 'none';
+    });
+    document.getElementById('card_employee').addEventListener('change', function() {
+      document.getElementById('card_employee_msg').style.display = this.checked ? 'block' : 'none';
+    });
+
+    // ラジオボタンを再クリックで選択解除
+    ['fm_employee', 'card_employee'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('mousedown', function() {
+        this._preClick = this.checked;
+      });
+      el.addEventListener('click', function() {
+        if (this._preClick) {
+          this.checked = false;
+          document.getElementById(id + '_msg').style.display = 'none';
+        }
+      });
+    });
+  });
 
   window.addEventListener('DOMContentLoaded', loadImages);
 
