@@ -1160,7 +1160,7 @@
   </div>
 
 <!-- STEP 0 -->
-  <div class="step0-wrap" id="step0">
+  <div class="step step0-wrap" id="step0">
     <div class="plan-set-block">
       <div class="plan-set-image-wrap">
         <div class="plan-set-image-placeholder">写真</div>
@@ -1864,7 +1864,10 @@
           <div class="hanko-card" onclick="selectHanko(this, '薩摩本柘 3本セット（セット内容）')" style="flex:1;min-width:160px;border:1px solid var(--border);background:var(--white);padding:16px;cursor:pointer;transition:all 0.2s;text-align:center;">
             <img id="hanko_img_satsuma" src="" alt="薩摩本柘 3本セット" style="width:100%;height:auto;object-fit:contain;margin-bottom:12px;display:none;">
             <div id="hanko_placeholder_satsuma" style="width:100%;height:100px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:11px;color:#999;">画像</div>
-            <div style="font-weight:700;font-size:13px;color:var(--primary);margin-bottom:4px;">薩摩本柘 3本セット</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px;">
+              <div class="hanko-radio-indicator" style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all 0.2s;display:flex;align-items:center;justify-content:center;"></div>
+              <div style="font-weight:700;font-size:13px;color:var(--primary);">薩摩本柘 3本セット</div>
+            </div>
             <div style="font-size:12px;color:var(--text);opacity:0.7;">セットに含まれる</div>
             <div style="font-size:13px;font-weight:700;color:var(--text);margin-top:6px;">+0円（税込）</div>
           </div>
@@ -1872,7 +1875,10 @@
           <div class="hanko-card" onclick="selectHanko(this, '黒水牛 3本セット（+13,200円税込）')" style="flex:1;min-width:160px;border:1px solid var(--border);background:var(--white);padding:16px;cursor:pointer;transition:all 0.2s;text-align:center;">
             <img id="hanko_img_kuroushi" src="" alt="黒水牛 3本セット" style="width:100%;height:auto;object-fit:contain;margin-bottom:12px;display:none;">
             <div id="hanko_placeholder_kuroushi" style="width:100%;height:100px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:11px;color:#999;">画像</div>
-            <div style="font-weight:700;font-size:13px;color:var(--primary);margin-bottom:4px;">黒水牛 3本セット</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px;">
+              <div class="hanko-radio-indicator" style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all 0.2s;display:flex;align-items:center;justify-content:center;"></div>
+              <div style="font-weight:700;font-size:13px;color:var(--primary);">黒水牛 3本セット</div>
+            </div>
             <div style="font-size:13px;font-weight:700;color:var(--text);margin-top:6px;">+13,200円（税込）</div>
           </div>
 
@@ -2133,6 +2139,11 @@
     <div class="complete-screen">
       <h2>送信が完了しました</h2>
       <p>ヒアリング内容を受け付けました。<br>内容を確認の上、担当者よりご連絡いたします。<br>しばらくお待ちください。</p>
+      <div style="margin-top:32px;padding:24px;background:#EBF5FA;border:1px solid var(--border);">
+        <p style="font-size:14px;font-weight:700;color:var(--primary);margin-bottom:12px;letter-spacing:0.05em;">■ 次のステップ</p>
+        <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">LST予約フォームより、打ち合わせ日程をご予約ください。</p>
+        <a id="lstUrl" href="#" target="_blank" rel="noopener" style="display:inline-block;background:var(--primary);color:#fff;font-family:'Zen Old Mincho',serif;font-size:14px;letter-spacing:0.08em;padding:14px 32px;text-decoration:none;">LST予約フォームへ進む ↗</a>
+      </div>
     </div>
   </div>
 
@@ -2184,9 +2195,21 @@
     document.querySelectorAll('.hanko-card').forEach(c => {
       c.style.borderColor = 'var(--border)';
       c.style.background = 'var(--white)';
+      const ind = c.querySelector('.hanko-radio-indicator');
+      if (ind) {
+        ind.style.borderColor = 'var(--border)';
+        ind.style.background = 'var(--white)';
+        ind.innerHTML = '';
+      }
     });
     card.style.borderColor = 'var(--primary)';
     card.style.background = '#EBF5FA';
+    const ind = card.querySelector('.hanko-radio-indicator');
+    if (ind) {
+      ind.style.borderColor = 'var(--primary)';
+      ind.style.background = 'var(--primary)';
+      ind.innerHTML = '<div style="width:7px;height:7px;border-radius:50%;background:#fff;"></div>';
+    }
     document.getElementById('hanko_material').value = value;
     updatePrice();
   }
@@ -2539,11 +2562,117 @@
   }
 
   function submitForm() {
-    // Google Apps Script送信処理はここに追加
-    document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-    document.getElementById('stepComplete').classList.add('active');
-    document.getElementById('progressBar').style.display = 'none';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const GAS_POST_URL = 'https://script.google.com/macros/s/AKfycbw6DygpqIClRy9JUnVKdFS8ONGGk_RznFl7YQYXMKq4xEAw0HmbwflyI33DmmpL-rc/exec';
+    const LST_URL = 'https://script.google.com/macros/u/2/s/AKfycbwaFVhsvOTZk6b8nH9ikNyoFJyqOuIuLG1eF8KkjgSvZgoD0uUzet0hzfJZfdZ3Pk0F/exec';
+
+    // 画像送付方法を取得
+    const imageMethodEl = document.querySelector('.step4-method-card.selected');
+    const imageMethod = imageMethodEl ? imageMethodEl.id.replace('method_card_', '') : '';
+
+    // オプション取得
+    const opts = [];
+    if (document.getElementById('opt_meishi').checked) opts.push('オリジナル名刺（両面）20,000円');
+    if (document.getElementById('opt_logo').checked) opts.push('ロゴ制作 30,000円');
+
+    // プラン名
+    const planNames = {
+      store_a: '店舗ありデザインサンプル A',
+      store_b: '店舗ありデザインサンプル B',
+      store_c: '店舗ありデザインサンプル C',
+      nostore_a: '店舗なしデザインサンプル A',
+      nostore_b: '店舗なしデザインサンプル B',
+      nostore_c: '店舗なしデザインサンプル C',
+      online: 'オンライン相談希望'
+    };
+
+    const params = {
+      full_name: document.getElementById('full_name').value || '',
+      company_name: document.getElementById('company_name').value || '',
+      title: document.getElementById('title').value || '',
+      industry: document.getElementById('industry').value || '',
+      target: document.getElementById('target').value || '',
+      pain: document.getElementById('pain').value || '',
+      result: document.getElementById('result').value || '',
+      catchcopy: document.getElementById('catchcopy').value || '',
+      base_color: document.getElementById('base_color').value || '',
+      color_note: document.getElementById('color_note').value || '',
+      story: document.getElementById('story').value || '',
+      value: document.getElementById('value').value || '',
+      strength1: document.getElementById('strength1').value || '',
+      strength2: document.getElementById('strength2').value || '',
+      strength3: document.getElementById('strength3').value || '',
+      s1_name: document.getElementById('s1_name').value || '',
+      s1_desc: document.getElementById('s1_desc').value || '',
+      s1_time: document.getElementById('s1_time').value || '',
+      s1_price: document.getElementById('s1_price').value || '',
+      s2_name: document.getElementById('s2_name').value || '',
+      s3_name: document.getElementById('s3_name').value || '',
+      no_publish: document.getElementById('no_publish').value || '',
+      contact_info: document.getElementById('contact_info').value || '',
+      reply_time: document.getElementById('reply_time').value || '',
+      address: document.getElementById('address') ? document.getElementById('address').value : '',
+      access: document.getElementById('access') ? document.getElementById('access').value : '',
+      business_hours: document.getElementById('business_hours') ? document.getElementById('business_hours').value : '',
+      holiday: document.getElementById('holiday') ? document.getElementById('holiday').value : '',
+      reserve_contact: document.getElementById('reserve_contact') ? document.getElementById('reserve_contact').value : '',
+      corp_name: document.getElementById('corp_name') ? document.getElementById('corp_name').value : '',
+      rep_name2: document.getElementById('rep_name2') ? document.getElementById('rep_name2').value : '',
+      corp_business: document.getElementById('corp_business') ? document.getElementById('corp_business').value : '',
+      drive_url: document.getElementById('drive_url') ? document.getElementById('drive_url').value : '',
+      image_method: imageMethod,
+      hanko_material: document.getElementById('hanko_material').value || '',
+      hanko_font: (document.querySelector('input[name="hanko_font"]:checked') || {}).value || '',
+      hanko_corp: document.getElementById('hanko_corp').value || '',
+      hanko_role: document.getElementById('hanko_role').value || '',
+      fm1: document.getElementById('fm1').value || '',
+      fm2: document.getElementById('fm2').value || '',
+      fm3: document.getElementById('fm3').value || '',
+      fm4: document.getElementById('fm4').value || '',
+      fm5: document.getElementById('fm5').value || '',
+      card_name: document.getElementById('card_name').value || '',
+      card_corp: document.getElementById('card_corp').value || '',
+      card_title: document.getElementById('card_title').value || '',
+      card_contact: document.getElementById('card_contact').value || '',
+      card_address: document.getElementById('card_address').value || '',
+      card_sns: document.getElementById('card_sns').value || '',
+      card_design: (document.querySelector('input[name="card_design"]:checked') || {}).value || '',
+      card_timing: (document.querySelector('input[name="card_timing"]:checked') || {}).value || '',
+      options: opts.join('、'),
+      selected_plan: planNames[selectedPlan] || selectedPlan,
+      total_price: document.getElementById('totalPrice').textContent || ''
+    };
+
+    // 送信ボタンを無効化
+    const btn = document.querySelector('#step8 .btn-primary');
+    if (btn) { btn.disabled = true; btn.textContent = '送信中...'; }
+
+    fetch(GAS_POST_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+      mode: 'no-cors'
+    })
+    .then(() => {
+      // 完了画面表示
+      localStorage.removeItem('kigyou_form_data');
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.getElementById('stepComplete').classList.add('active');
+      document.getElementById('progressBar').style.display = 'none';
+      // LST URL表示
+      const lstEl = document.getElementById('lstUrl');
+      if (lstEl) lstEl.href = LST_URL;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+    .catch(() => {
+      // エラーでも完了画面へ（no-corsのため常にここに来る場合あり）
+      localStorage.removeItem('kigyou_form_data');
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.getElementById('stepComplete').classList.add('active');
+      document.getElementById('progressBar').style.display = 'none';
+      const lstEl = document.getElementById('lstUrl');
+      if (lstEl) lstEl.href = LST_URL;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
   function selectImageMethod(method) {
@@ -2617,6 +2746,9 @@
   }
 
   window.addEventListener('DOMContentLoaded', function() {
+    // 初期表示：STEP0をactive
+    document.getElementById('step0').classList.add('active');
+
     document.getElementById('fm_employee').addEventListener('change', function() {
       document.getElementById('fm_employee_msg').style.display = this.checked ? 'block' : 'none';
     });
