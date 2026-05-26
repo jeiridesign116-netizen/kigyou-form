@@ -98,11 +98,36 @@
   /* Progress */
   .progress-bar {
     display: flex;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+    gap: 0;
     margin-bottom: 48px;
     padding: 0;
     position: relative;
+  }
+
+  .progress-row {
+    display: contents;
+  }
+
+  /* PCでは最後のprogress-stepのみ線なし */
+  .progress-bar > .progress-row:last-child > .progress-step:last-child::after {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .progress-bar {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .progress-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      position: relative;
+      width: 100%;
+    }
   }
 
   .progress-step {
@@ -115,7 +140,7 @@
     z-index: 1;
   }
 
-  .progress-step:not(:last-child)::after {
+  .progress-step::after {
     content: '';
     position: absolute;
     top: 14px;
@@ -124,6 +149,10 @@
     height: 1px;
     background: var(--border);
     z-index: 0;
+  }
+
+  .progress-bar > .progress-row:last-child > .progress-step:last-child::after {
+    display: none;
   }
 
   .progress-step.active::after,
@@ -183,6 +212,33 @@
   }
   .progress-step.done .step-circle:hover {
     transform: scale(1.1);
+  }
+
+  /* フリーメイトレイアウト */
+  .freemate-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .freemate-text {
+    flex: 1;
+  }
+  .freemate-img-wrap {
+    flex-shrink: 0;
+    width: 180px;
+  }
+
+  @media (max-width: 600px) {
+    .freemate-layout {
+      flex-direction: column;
+    }
+    .freemate-img-wrap {
+      width: 100%;
+      order: -1;
+    }
+    .freemate-text {
+      order: 1;
+    }
   }
 
   /* Step Content */
@@ -1006,6 +1062,22 @@
     font-family: 'Zen Old Mincho', serif;
   }
 
+  @media (max-width: 600px) {
+    .price-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 10px 16px;
+    }
+    .price-footer-amount {
+      font-size: 16px;
+    }
+    #priceBreakdown {
+      margin-left: 0 !important;
+      font-size: 10px !important;
+    }
+  }
+
   .price-footer-label {
     font-size: 12px;
     opacity: 0.7;
@@ -1121,30 +1193,33 @@
 
   <!-- Progress -->
   <div class="progress-bar" id="progressBar">
-    <div class="progress-step active" data-step="0">
-      <div class="step-circle" style="cursor:pointer;" onclick="backToStep0()">0</div>
-      <div class="step-label">プラン確認</div>
+    <div class="progress-row">
+      <div class="progress-step active" data-step="0">
+        <div class="step-circle" style="cursor:pointer;" onclick="backToStep0()">0</div>
+        <div class="step-label">プラン確認</div>
+      </div>
+      <div class="progress-step" data-step="1">
+        <div class="step-circle">1</div>
+        <div class="step-label">プラン選択</div>
+      </div>
+      <div class="progress-step" data-step="2">
+        <div class="step-circle">2</div>
+        <div class="step-label">基本情報</div>
+      </div>
+      <div class="progress-step" data-step="3">
+        <div class="step-circle">3</div>
+        <div class="step-label">サイト情報</div>
+      </div>
+      <div class="progress-step" data-step="4">
+        <div class="step-circle">4</div>
+        <div class="step-label">画像提出</div>
+      </div>
     </div>
-    <div class="progress-step" data-step="1">
-      <div class="step-circle">1</div>
-      <div class="step-label">プラン選択</div>
-    </div>
-    <div class="progress-step" data-step="2">
-      <div class="step-circle">2</div>
-      <div class="step-label">基本情報</div>
-    </div>
-    <div class="progress-step" data-step="3">
-      <div class="step-circle">3</div>
-      <div class="step-label">サイト情報</div>
-    </div>
-    <div class="progress-step" data-step="4">
-      <div class="step-circle">4</div>
-      <div class="step-label">画像提出</div>
-    </div>
-    <div class="progress-step" data-step="5">
-      <div class="step-circle">5</div>
-      <div class="step-label">印鑑</div>
-    </div>
+    <div class="progress-row">
+      <div class="progress-step" data-step="5">
+        <div class="step-circle">5</div>
+        <div class="step-label">印鑑</div>
+      </div>
     <div class="progress-step" data-step="6">
       <div class="step-circle">6</div>
       <div class="step-label">名刺</div>
@@ -1156,6 +1231,7 @@
     <div class="progress-step" data-step="8">
       <div class="step-circle">8</div>
       <div class="step-label">確認</div>
+    </div>
     </div>
   </div>
 
@@ -1936,8 +2012,8 @@
     <div class="section-block">
       <div class="section-block-title">フリーメイト5枚</div>
       <div class="notice-box" style="margin-bottom:12px;font-size:11px;">STEP2・3で入力した情報を自動で引き継いでいます。修正がある場合はここで変更してください。</div>
-      <div style="display:flex;gap:20px;align-items:flex-start;margin-bottom:20px;">
-        <div class="notice-box" style="flex:1;margin-bottom:0;">
+      <div class="freemate-layout" style="margin-bottom:20px;">
+        <div class="notice-box freemate-text" style="margin-bottom:0;">
           記入例：<br>
           1枚目：〒116-0002 東京都荒川区荒川1-2-3<br>
           2枚目：株式会社〇〇〇〇<br>
@@ -1945,9 +2021,9 @@
           4枚目：TEL 03-1234-5678<br>
           5枚目：登録番号 T1234567890123
         </div>
-        <div style="flex-shrink:0;width:180px;height:140px;position:relative;">
-        <img id="freemate_img" src="" alt="フリーメイト" style="width:180px;height:auto;display:none;border:1px solid var(--border);">
-        <div id="freemate_placeholder" style="width:180px;height:140px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
+        <div class="freemate-img-wrap">
+          <img id="freemate_img" src="" alt="フリーメイト" style="width:100%;height:auto;display:none;border:1px solid var(--border);">
+          <div id="freemate_placeholder" style="width:100%;height:140px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:11px;color:#999;border:1px solid var(--border);">画像</div>
         </div>
       </div>
       <div class="field"><label>1枚目　住所<span class="required">必須</span></label><input type="text" id="fm1" placeholder="例：〒116-0002 東京都荒川区荒川1-2-3"></div>
@@ -2217,6 +2293,7 @@
 
     document.getElementById('totalPrice').textContent = base.toLocaleString() + '円';
     document.getElementById('priceBreakdown').innerHTML = details.join('<br>');
+    updateFooterPadding();
   }
 
   function selectHanko(card, value) {
@@ -2855,6 +2932,16 @@
       }
     });
   });
+
+  // フッター高さを動的にbodyのpadding-bottomに反映
+  function updateFooterPadding() {
+    const footer = document.querySelector('.price-footer');
+    if (footer) {
+      document.body.style.paddingBottom = footer.offsetHeight + 16 + 'px';
+    }
+  }
+  window.addEventListener('DOMContentLoaded', updateFooterPadding);
+  window.addEventListener('resize', updateFooterPadding);
 
   // STEPが表示されるたびに画像を再適用
   const _origShowStep = window.showStep;
